@@ -1,15 +1,19 @@
 import React from "react";
 
-function Conversations() {
+function ConversationList() {
   return (
-    <div className="Conversations">
+    <div className="ConversationList">
+      <div className="d-flex justify-content-between">
+        <div>Edit</div>
+        <div>New</div>
+      </div>
       <h1>Conversations</h1>
+      {/* Component To Render */}
       <div class="row">
-        <div className="ConversationIcon col-2">
+        <div className="ConversationListIcon col-2">
           <img src="" alt="icon" />
         </div>
-        {/* Component To Render */}
-        <div className="ConversationInfo col-10">
+        <div className="ConversationListInfo col-10">
           <div className="row">
             <div className="col-8">
               <b>[Conversation Name]</b>
@@ -23,8 +27,9 @@ function Conversations() {
           </div>
         </div>
       </div>
+      {/* End of Component To Render */}
     </div>
   );
 }
 
-export default Conversations;
+export default ConversationList;
