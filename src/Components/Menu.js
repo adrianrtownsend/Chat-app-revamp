@@ -2,12 +2,16 @@ import React from "react";
 
 function Menu(props) {
   return (
-    <div className="Menu">
-      <ul>
+    <div className="Menu col-12">
+      <div className="row">
         {props.links.map(link => {
-          return <li key={link.id}>{link.name}</li>;
+          return (
+            <div className="col-3" key={link.id}>
+              {link.name}
+            </div>
+          );
         })}
-      </ul>
+      </div>
     </div>
   );
 }

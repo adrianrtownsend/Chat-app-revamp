@@ -30,7 +30,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="App container-fluid">
         <Conversations />
         <Menu links={this.state.menuLinks} />
       </div>
