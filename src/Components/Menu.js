@@ -7,7 +7,12 @@ function Menu(props) {
         {props.links.map(link => {
           return (
             <div className="col-3" key={link.id}>
-              {link.name}
+              <div className="row">
+                <div className="col-12">
+                  <img src={link.icon} alt={link.name} className="MenuIcon" />
+                </div>
+                <div className="col-12">{link.name}</div>
+              </div>
             </div>
           );
         })}

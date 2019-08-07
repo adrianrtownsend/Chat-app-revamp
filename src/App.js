@@ -2,7 +2,7 @@ import React from "react";
 /* import Chatkit !!CLIENT!! not regular chatkit */
 import Chatkit from "@pusher/chatkit-client";
 import Menu from "./Components/Menu";
-/* import Conversations from "./Components/ConversationList"; */
+import ConversationList from "./Components/ConversationList";
 import Conversation from "./Components/Conversation";
 import Notifications from "./Components/Notifications";
 
@@ -17,10 +17,29 @@ class App extends React.Component {
       joinableRooms: [],
       joinedRooms: [],
       menuLinks: [
-        { id: 1, name: "Conversations" },
-        { id: 2, name: "Friends" },
-        { id: 3, name: "Notifications" },
-        { id: 4, name: "Account" }
+        {
+          id: 1,
+          name: "Conversations",
+          icon:
+            "https://images.vexels.com/media/users/3/136808/isolated/preview/d3455a22af5f3ed7565fb5fb71bb8d43-send-message-icon-by-vexels.png"
+        },
+        {
+          id: 2,
+          name: "Friends",
+          icon:
+            "https://cdn2.iconfinder.com/data/icons/4web-3/139/header-account-image-line-512.png"
+        },
+        {
+          id: 3,
+          name: "Notifications",
+          icon: "https://png.pngtree.com/svg/20170907/3a63e3809c.png"
+        },
+        {
+          id: 4,
+          name: "Account",
+          icon:
+            "https://cdn4.iconfinder.com/data/icons/evil-icons-user-interface/64/setting-512.png"
+        }
       ]
     };
   }
@@ -58,10 +77,12 @@ class App extends React.Component {
   render() {
     return (
       <div className="App container-fluid">
-        <Conversation />
-        {/*<Notifications /> */}
-        {/* <ConversationList /> */}
-        <Menu links={this.state.menuLinks} />
+        <div className="row">
+          {/*<Conversation />*/}
+          {/*<Notifications /> */}
+          <ConversationList />
+          <Menu links={this.state.menuLinks} />
+        </div>
       </div>
     );
   }
