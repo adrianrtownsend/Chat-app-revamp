@@ -9,7 +9,7 @@ function Notifications() {
         </div>
         <div className="col-2">[Edit]</div>
         {/* Component To Render */}
-        <div class="row">
+        <div className="row">
           <div className="ConversationIcon col-2">
             <img src="" alt="icon" />
           </div>

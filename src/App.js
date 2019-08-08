@@ -2,8 +2,9 @@ import React from "react";
 /* import Chatkit !!CLIENT!! not regular chatkit */
 import Chatkit from "@pusher/chatkit-client";
 import Menu from "./Components/Menu";
-import ConversationList from "./Components/ConversationList";
+import Conversations from "./Components/Conversations";
 import Conversation from "./Components/Conversation";
+import Account from "./Components/Account";
 import Notifications from "./Components/Notifications";
 
 import { tokenUrl, instanceLocator } from "./config";
@@ -13,6 +14,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       roomId: null,
+      rooms: [],
       messages: [],
       joinableRooms: [],
       joinedRooms: [],
@@ -21,32 +23,34 @@ class App extends React.Component {
           id: 1,
           name: "Conversations",
           icon:
-            "https://images.vexels.com/media/users/3/136808/isolated/preview/d3455a22af5f3ed7565fb5fb71bb8d43-send-message-icon-by-vexels.png"
+            "https://images.vexels.com/media/users/3/136808/isolated/preview/d3455a22af5f3ed7565fb5fb71bb8d43-send-message-icon-by-vexels.png",
+          disabled: true
         },
         {
           id: 2,
           name: "Friends",
           icon:
-            "https://cdn2.iconfinder.com/data/icons/4web-3/139/header-account-image-line-512.png"
+            "https://cdn2.iconfinder.com/data/icons/4web-3/139/header-account-image-line-512.png",
+          disabled: true
         },
         {
           id: 3,
           name: "Notifications",
-          icon: "https://png.pngtree.com/svg/20170907/3a63e3809c.png"
+          icon: "https://png.pngtree.com/svg/20170907/3a63e3809c.png",
+          disabled: true
         },
         {
           id: 4,
           name: "Account",
           icon:
-            "https://cdn4.iconfinder.com/data/icons/evil-icons-user-interface/64/setting-512.png"
+            "https://cdn4.iconfinder.com/data/icons/evil-icons-user-interface/64/setting-512.png",
+          disabled: true
         }
       ]
     };
   }
 
   componentDidMount() {
-    console.log("Mounted");
-    console.log(tokenUrl, instanceLocator);
     const chatManager = new Chatkit.ChatManager({
       instanceLocator, // instanceLocator:instanceLocator
       userId: "red",
@@ -58,29 +62,38 @@ class App extends React.Component {
       .connect()
       .then(currentUser => {
         currentUser.subscribeToRoomMultipart({
-          roomId: currentUser.rooms[0].id,
+          roomId: "31266321",
           hooks: {
             onMessage: message => {
               console.log(
                 "Received message:",
                 message.parts[0].payload.content
               );
+              this.setState({ messages: [...this.state.messages, message] });
             }
           }
+        });
+        this.currentUser = currentUser;
+        this.setState({
+          joinedRooms: currentUser.rooms
         });
       })
       .catch(error => {
         console.error("error:", error);
       });
   }
-
   render() {
     return (
       <div className="App container-fluid">
         <div className="row">
-          {/*<Conversation />*/}
+          {/*<Conversation
+            room={this.state.roomId}
+            messages={this.state.messages}
+          />*/}
+
+          {/*<Account />*/}
           {/*<Notifications /> */}
-          <ConversationList />
+          <Conversations rooms={this.state.joinedRooms} />
           <Menu links={this.state.menuLinks} />
         </div>
       </div>

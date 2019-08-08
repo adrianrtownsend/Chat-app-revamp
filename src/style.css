@@ -1,9 +1,9 @@
 :root {
-  --main-color: #EF233C;
-  --secondary-color: #EDF2F4;
-  --main-text-color: #D80032;
-  --secondary-text-color: #2B2D42;
-  --send-message-form: #8D99AE;
+  --main-color: #ef233c;
+  --secondary-color: #edf2f4;
+  --main-text-color: #d80032;
+  --secondary-text-color: #2b2d42;
+  --send-message-form: #8d99ae;
 }
 
 html,
@@ -22,37 +22,63 @@ body {
   height: 100%;
 }
 
+.disabled {
+  display: none;
+}
+
 .Menu {
   border-radius: 10px 10px 0 0;
   box-shadow: var(--secondary-color) -5px -5px 5px;
-  text-align:center;
+  width: 100%;
   bottom: 0;
-  height:50px;
+  height: 75px;
   position: fixed;
   background-color: var(--main-color);
   font-weight: 600;
   color: var(--secondary-color);
 }
 
+.Menu button {
+  border: none;
+  background: none;
+  outline: none;
+}
+
 .MenuIcon {
-  width: 20px;
+  width: 45px;
+}
+
+.ConversationScroll {
+  /*overflow: scroll;*/
 }
 
 .ConversationList h1 {
-  margin-left: 50px;
+  font-weight: 600;
 }
 
-.ConversationListIcon img {
+.ConversationListIcon img,
+.ConversationListItem div img,
+.AccountIcon img {
   width: 50px;
+}
+
+.ConversationInput {
+  position: fixed;
+  bottom: 80px;
+}
+
+.ConversationInput form {
+  padding: 10px;
+}
+
+.AccountSettings ul {
+  padding: 0;
 }
 
 li {
   list-style-type: none;
 }
 
-
-
- 
 /*
 html,
 body {
@@ -99,7 +125,7 @@ body {
 }
 
 /* REST OF CSS */
-.rooms-list {
+/*.rooms-list {
   box-sizing: border-box;
   padding: 10px;
   background-color: var(--main-color);
@@ -172,9 +198,10 @@ body {
 .new-room-form button {
   border: 0;
 }
-
+*/
 .message {
   margin: 15px 0;
+  float: right;
 }
 
 .message .message-username {
@@ -187,10 +214,10 @@ body {
   background: var(--main-color);
   color: var(--secondary-color);
   display: inline;
+  clear: both;
   padding: 4px 8px;
   border-radius: 8px;
 }
-
 .message-list {
   box-sizing: border-box;
   padding-left: 6px;
@@ -208,7 +235,7 @@ body {
   font-size: 34px;
   font-weight: 300;
 }
-
+/*
 .send-message-form {
   background: var(--send-message-form);
   display: flex;
