@@ -28,7 +28,7 @@ class AppContainer extends React.Component {
           <Account
             activeUser={this.props.activeUser}
             activeUsername={this.props.activeUsername}
-            signOut={this.signOut}
+            logout={this.logout}
           />
         );
       default:

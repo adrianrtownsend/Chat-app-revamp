@@ -43,7 +43,7 @@ function Account(props) {
             <hr />
           </li>
           <li className="SignOut">
-            <button onClick={() => props.signOut("out")}>Sign Out</button>
+            <button onClick={() => props.logout()}>Sign Out</button>
             <hr />
           </li>
         </ul>

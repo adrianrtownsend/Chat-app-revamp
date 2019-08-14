@@ -81,7 +81,8 @@ class App extends React.Component {
   }
 
   signOut(e) {
-    console.log("Signed Out!!", e);
+    this.currentUser.disconnect();
+    console.log("Signed Out!!", this.state.activeUser);
   }
 
   setActiveUser() {
@@ -140,7 +141,7 @@ class App extends React.Component {
     return (
       <div className="App container-fluid">
         <div className="row">
-          <AppContainer
+          {/*<AppContainer
             room={this.state.roomId}
             messages={this.state.messages}
             sendMessage={this.sendMessage}
@@ -149,16 +150,16 @@ class App extends React.Component {
             activeComponent={this.state.activeComponent}
             activeUser={this.state.activeUser}
             activeUsername={this.state.activeUsername}
-            signOut={this.signOut}
-          />
-          {/*<Conversations
+            logout={this.signOut}
+          />*/}
+          <Conversations
             subscribeToRoom={this.subscribeToRoom}
             rooms={this.state.joinedRooms}
           />
           <Conversation
             messages={this.state.messages}
             sendMessage={this.sendMessage}
-          />*/}
+          />
           <Menu menuChange={this.menuChange} links={this.state.menuLinks} />
         </div>
       </div>
