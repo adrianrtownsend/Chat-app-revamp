@@ -20,8 +20,8 @@ function Account(props) {
           />
         </div>
         <div className="col-10">
-          <h3>Name Here</h3>
-          <h5>Username Here</h5>
+          <h3>{props.activeUser}</h3>
+          <h5>{props.activeUsername}</h5>
         </div>
       </div>
       <div className="col-12 AccountSettings">
@@ -43,7 +43,7 @@ function Account(props) {
             <hr />
           </li>
           <li className="SignOut">
-            [Sign Out]
+            <button onClick={() => props.signOut("out")}>Sign Out</button>
             <hr />
           </li>
         </ul>

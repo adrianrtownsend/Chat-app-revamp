@@ -13,7 +13,10 @@ function Conversations(props) {
         </div>
       </div>
       <h1>Conversations</h1>
-      <ConversationList rooms={props.rooms} />
+      <ConversationList
+        subscribeToRoom={props.subscribeToRoom}
+        rooms={props.rooms}
+      />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import React from "react";
 /* import Chatkit !!CLIENT!! not regular chatkit */
 import Chatkit from "@pusher/chatkit-client";
+import AppContainer from "./Components/AppContainer";
 import Menu from "./Components/Menu";
 import Conversations from "./Components/Conversations";
 import Conversation from "./Components/Conversation";
@@ -13,6 +14,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      activeUser: "",
+      activeUsername: "",
+      activeComponent: "",
       roomId: null,
       rooms: [],
       messages: [],
@@ -48,6 +52,12 @@ class App extends React.Component {
         }
       ]
     };
+    this.sendMessage = this.sendMessage.bind(this);
+    this.subscribeToRoom = this.subscribeToRoom.bind(this);
+    this.getJoinableRooms = this.getJoinableRooms.bind(this);
+    this.menuChange = this.menuChange.bind(this);
+    this.setActiveUser = this.setActiveUser.bind(this);
+    this.signOut = this.signOut.bind(this);
   }
 
   componentDidMount() {
@@ -61,40 +71,95 @@ class App extends React.Component {
     chatManager
       .connect()
       .then(currentUser => {
-        currentUser.subscribeToRoomMultipart({
-          roomId: "31266321",
-          hooks: {
-            onMessage: message => {
-              console.log(
-                "Received message:",
-                message.parts[0].payload.content
-              );
-              this.setState({ messages: [...this.state.messages, message] });
-            }
-          }
-        });
         this.currentUser = currentUser;
-        this.setState({
-          joinedRooms: currentUser.rooms
-        });
+        this.getJoinableRooms();
+        this.setActiveUser();
       })
       .catch(error => {
-        console.error("error:", error);
+        console.error("Error connecting:", error);
       });
   }
+
+  signOut(e) {
+    console.log("Signed Out!!", e);
+  }
+
+  setActiveUser() {
+    this.setState({
+      activeUser: this.currentUser.id,
+      activeUsername: this.currentUser.encodedId
+    });
+  }
+
+  getJoinableRooms() {
+    this.currentUser
+      .getJoinableRooms()
+      .then(joinableRooms => {
+        this.setState({
+          joinableRooms,
+          joinedRooms: this.currentUser.rooms
+        });
+      })
+      .catch(err => console.log("error on joinableRooms: ", err));
+  }
+
+  subscribeToRoom(roomId) {
+    this.setState({ messages: [] });
+    this.currentUser
+      .subscribeToRoomMultipart({
+        roomId: roomId,
+        hooks: {
+          onMessage: message => {
+            console.log("Received message:", message.parts[0].payload.content);
+            this.setState({ messages: [...this.state.messages, message] });
+          }
+        }
+      })
+      .then(room => {
+        this.setState({
+          roomId: room.id
+        });
+        this.getJoinableRooms();
+      });
+  }
+
+  menuChange(value) {
+    this.setState({
+      activeComponent: value
+    });
+  }
+
+  sendMessage(text, roomId) {
+    this.currentUser.sendSimpleMessage({
+      text,
+      roomId: this.state.roomId
+    });
+  }
+
   render() {
     return (
       <div className="App container-fluid">
         <div className="row">
-          {/*<Conversation
+          <AppContainer
             room={this.state.roomId}
             messages={this.state.messages}
+            sendMessage={this.sendMessage}
+            subscribeToRoom={this.subscribeToRoom}
+            rooms={this.state.joinedRooms}
+            activeComponent={this.state.activeComponent}
+            activeUser={this.state.activeUser}
+            activeUsername={this.state.activeUsername}
+            signOut={this.signOut}
+          />
+          {/*<Conversations
+            subscribeToRoom={this.subscribeToRoom}
+            rooms={this.state.joinedRooms}
+          />
+          <Conversation
+            messages={this.state.messages}
+            sendMessage={this.sendMessage}
           />*/}
-
-          {/*<Account />*/}
-          {/*<Notifications /> */}
-          <Conversations rooms={this.state.joinedRooms} />
-          <Menu links={this.state.menuLinks} />
+          <Menu menuChange={this.menuChange} links={this.state.menuLinks} />
         </div>
       </div>
     );
