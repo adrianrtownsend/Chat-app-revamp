@@ -1,10 +1,14 @@
 import React from "react";
 
 function Message(props) {
+  const activeUserClass =
+    props.activeUser === props.username ? "activeUserClass-" : "";
   return (
-    <div className="message col-12">
-      <div className="message-username">{props.username}</div>
-      <div className="message-text">{props.text}</div>
+    <div className="message">
+      <div className={activeUserClass + "message-username"}>
+        {props.username}
+      </div>
+      <div className={activeUserClass + "message-text"}>{props.text}</div>
       <br />
     </div>
   );

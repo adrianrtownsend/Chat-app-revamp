@@ -4,14 +4,7 @@ import ConversationList from "./ConversationList";
 function Conversations(props) {
   return (
     <div className="ConversationList col-12 pt-3">
-      <div className="d-flex justify-content-between">
-        <div>
-          <b>Edit</b>
-        </div>
-        <div>
-          <b>New</b>
-        </div>
-      </div>
+      <div className="d-flex justify-content-between" />
       <h1>Conversations</h1>
       <ConversationList
         subscribeToRoom={props.subscribeToRoom}

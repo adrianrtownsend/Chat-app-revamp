@@ -13,7 +13,7 @@ function Menu(props) {
         </button>
       </div>
       <div key={props.links[1].id}>
-        <button onClick={() => props.menuChange("Friends")}>
+        <button onClick={() => props.menuChange("New")}>
           <img
             src={props.links[1].icon}
             alt={props.links[1].name}
@@ -26,15 +26,6 @@ function Menu(props) {
           <img
             src={props.links[2].icon}
             alt={props.links[2].name}
-            className="MenuIcon"
-          />
-        </button>
-      </div>
-      <div key={props.links[3].id}>
-        <button onClick={() => props.menuChange("Account")}>
-          <img
-            src={props.links[3].icon}
-            alt={props.links[3].name}
             className="MenuIcon"
           />
         </button>

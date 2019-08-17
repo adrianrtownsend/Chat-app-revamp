@@ -2,52 +2,29 @@ import React from "react";
 
 function Account(props) {
   return (
-    <div className="Account col-12 pt-3">
-      <div className="d-flex justify-content-between">
-        <div>
-          <b>Edit</b>
-        </div>
-        <div>
-          <b>New</b>
-        </div>
-      </div>
-      <h1>Account Settings</h1>
+    <div className="Account col-12 pt-5">
+      <h1>
+        <b>My Account</b>
+      </h1>
       <div className="row my-3">
         <div className="AccountIcon col-2">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Circle-icons-camera.svg/1024px-Circle-icons-camera.svg.png"
-            alt="icon"
-          />
+          <div className=" d-flex flex-wrap justify-content-center align-items-center">
+            <span>{props.activeUser.charAt(0)}</span>
+          </div>
         </div>
         <div className="col-10">
-          <h3>{props.activeUser}</h3>
+          <h3>
+            <b>{props.activeUser}</b>
+          </h3>
           <h5>{props.activeUsername}</h5>
         </div>
       </div>
-      <div className="col-12 AccountSettings">
-        <ul>
-          <li>
-            [Change Name/Username]
-            <hr />
-          </li>
-          <li>
-            [Change Password]
-            <hr />
-          </li>
-          <li>
-            [Friends List]
-            <hr />
-          </li>
-          <li>
-            [Privacy Settings]
-            <hr />
-          </li>
-          <li className="SignOut">
-            <button onClick={() => props.logout()}>Sign Out</button>
-            <hr />
-          </li>
-        </ul>
+      <div className="col-12 SignOut d-flex flex-wrap justify-content-center">
+        <div>
+          <button onClick={() => props.logout()}>Sign Out</button>
+        </div>
       </div>
+      <hr />
     </div>
   );
 }

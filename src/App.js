@@ -17,6 +17,7 @@ class App extends React.Component {
       activeUser: "",
       activeUsername: "",
       activeComponent: "",
+      activeRoom: "",
       roomId: null,
       rooms: [],
       messages: [],
@@ -32,19 +33,12 @@ class App extends React.Component {
         },
         {
           id: 2,
-          name: "Friends",
-          icon:
-            "https://cdn2.iconfinder.com/data/icons/4web-3/139/header-account-image-line-512.png",
+          name: "New",
+          icon: "https://abeon-hosting.com/images/new-message-icon-png-8.png",
           disabled: true
         },
         {
           id: 3,
-          name: "Notifications",
-          icon: "https://png.pngtree.com/svg/20170907/3a63e3809c.png",
-          disabled: true
-        },
-        {
-          id: 4,
           name: "Account",
           icon:
             "https://cdn4.iconfinder.com/data/icons/evil-icons-user-interface/64/setting-512.png",
@@ -58,6 +52,7 @@ class App extends React.Component {
     this.menuChange = this.menuChange.bind(this);
     this.setActiveUser = this.setActiveUser.bind(this);
     this.signOut = this.signOut.bind(this);
+    this.whosMessage = this.whosMessage.bind(this);
   }
 
   componentDidMount() {
@@ -104,7 +99,7 @@ class App extends React.Component {
       .catch(err => console.log("error on joinableRooms: ", err));
   }
 
-  subscribeToRoom(roomId) {
+  subscribeToRoom(roomId, roomName) {
     this.setState({ messages: [] });
     this.currentUser
       .subscribeToRoomMultipart({
@@ -118,7 +113,8 @@ class App extends React.Component {
       })
       .then(room => {
         this.setState({
-          roomId: room.id
+          roomId: room.id,
+          activeRoom: roomName
         });
         this.getJoinableRooms();
       });
@@ -136,6 +132,8 @@ class App extends React.Component {
       roomId: this.state.roomId
     });
   }
+
+  whosMessage(username) {}
 
   render() {
     return (
@@ -159,7 +157,15 @@ class App extends React.Component {
           <Conversation
             messages={this.state.messages}
             sendMessage={this.sendMessage}
+            room={this.state.roomId}
+            roomName={this.state.activeRoom}
+            activeUser={this.state.activeUser}
           />
+          {/*<Account
+            activeUser={this.state.activeUser}
+            activeUsername={this.state.activeUsername}
+            logout={this.logout}
+          />*/}
           <Menu menuChange={this.menuChange} links={this.state.menuLinks} />
         </div>
       </div>

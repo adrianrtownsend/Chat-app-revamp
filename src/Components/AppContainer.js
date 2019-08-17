@@ -1,6 +1,6 @@
 import React from "react";
 import Conversations from "./Conversations";
-import Friends from "./Friends";
+import New from "./New";
 import Notifications from "./Notifications";
 import Account from "./Account";
 
@@ -19,8 +19,8 @@ class AppContainer extends React.Component {
             rooms={this.props.joinedRooms}
           />
         );
-      case "Friends":
-        return <Friends />;
+      case "New":
+        return <New />;
       case "Notifications":
         return <Notifications />;
       case "Account":
