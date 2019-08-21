@@ -5,12 +5,11 @@ import SendMessageForm from "./SendMessageForm";
 function Conversation(props) {
   return (
     <div className="ConversationBox col-12 d-flex flex-column pb-5">
-      <div className="row border p-2 d-flex align-items-center">
+      <div className="row p-2 d-flex align-items-center">
         <div className="ConversationName col-10">
           <h1>
             <b>{props.roomName}</b>
           </h1>
-          <h5>[Members Online]</h5>
         </div>
       </div>
       <div className="MessageRow row px-1 pt-2 pb-5">
