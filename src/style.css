@@ -86,6 +86,21 @@ body {
   color: var(--secondary-color);
 }
 
+.NewConversationForm {
+  width: 75%;
+}
+
+.NewConversationForm hr {
+  margin-bottom: 0;
+}
+
+.NewConversationForm button {
+  border: 0;
+  color: var(--main-color);
+  background: none;
+  font-size: 24px;
+}
+
 .SignOut button {
   width: 200px;
   border: 0;
@@ -99,6 +114,7 @@ body {
 .ConversationInput {
   position: fixed;
   bottom: 80px;
+  background-color: white;
 }
 
 .ConversationInput form {

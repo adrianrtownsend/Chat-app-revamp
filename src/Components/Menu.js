@@ -22,7 +22,7 @@ function Menu(props) {
         </button>
       </div>
       <div key={props.links[2].id}>
-        <button onClick={() => props.menuChange("Notifications")}>
+        <button onClick={() => props.menuChange("Account")}>
           <img
             src={props.links[2].icon}
             alt={props.links[2].name}

@@ -21,7 +21,7 @@ function Account(props) {
       </div>
       <div className="col-12 SignOut d-flex flex-wrap justify-content-center">
         <div>
-          <button onClick={() => props.logout()}>Sign Out</button>
+          <button onClick={()=> props.signOut()}>Sign Out</button>
         </div>
       </div>
       <hr />

@@ -1,41 +1,52 @@
 import React from "react";
 import Conversations from "./Conversations";
 import New from "./New";
-import Notifications from "./Notifications";
 import Account from "./Account";
 
 class AppContainer extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      joinedRooms: []
+    };
     this.menuChange = this.menuChange.bind(this);
   }
   menuChange() {
     const e = this.props.activeComponent;
+
     switch (e) {
       case "Conversations":
         return (
           <Conversations
-            subscribeToRoom={this.subscribeToRoom}
-            rooms={this.props.joinedRooms}
+            subscribeToRoom={this.props.subscribeToRoom}
+            rooms={this.props.rooms}
+            messages={this.props.messages}
+            sendMessage={this.props.sendMessage}
+            room={this.props.roomId}
+            roomName={this.props.roomName}
+            activeUser={this.props.activeUser}
           />
         );
       case "New":
-        return <New />;
-      case "Notifications":
-        return <Notifications />;
+        return <New createRoom={this.props.createRoom} />;
       case "Account":
         return (
           <Account
             activeUser={this.props.activeUser}
             activeUsername={this.props.activeUsername}
-            logout={this.logout}
+            signOut={this.props.signOut}
           />
         );
       default:
         return (
           <Conversations
-            subscribeToRoom={this.subscribeToRoom}
-            rooms={this.props.joinedRooms}
+            subscribeToRoom={this.props.subscribeToRoom}
+            rooms={this.props.rooms}
+            messages={this.props.messages}
+            sendMessage={this.props.sendMessage}
+            room={this.props.roomId}
+            roomName={this.props.roomName}
+            activeUser={this.props.activeUser}
           />
         );
     }

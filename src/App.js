@@ -6,7 +6,6 @@ import Menu from "./Components/Menu";
 import Conversations from "./Components/Conversations";
 import Conversation from "./Components/Conversation";
 import Account from "./Components/Account";
-import Notifications from "./Components/Notifications";
 
 import { tokenUrl, instanceLocator } from "./config";
 
@@ -52,7 +51,7 @@ class App extends React.Component {
     this.menuChange = this.menuChange.bind(this);
     this.setActiveUser = this.setActiveUser.bind(this);
     this.signOut = this.signOut.bind(this);
-    this.whosMessage = this.whosMessage.bind(this);
+    this.createRoom = this.createRoom.bind(this);
   }
 
   componentDidMount() {
@@ -75,9 +74,11 @@ class App extends React.Component {
       });
   }
 
-  signOut(e) {
+  signOut() {
     this.currentUser.disconnect();
-    console.log("Signed Out!!", this.state.activeUser);
+    this.setState({
+      activeUser: ""
+    });
   }
 
   setActiveUser() {
@@ -120,6 +121,22 @@ class App extends React.Component {
       });
   }
 
+  createRoom(value) {
+    this.currentUser
+      .createRoom({
+        id: value,
+        name: value,
+        private: false,
+        addUserIds: [this.state.activeUser]
+      })
+      .then(room => {
+        console.log("Created room called", room.name);
+      })
+      .catch(err => {
+        console.log("Error creating room", err);
+      });
+  }
+
   menuChange(value) {
     this.setState({
       activeComponent: value
@@ -133,39 +150,24 @@ class App extends React.Component {
     });
   }
 
-  whosMessage(username) {}
-
   render() {
     return (
       <div className="App container-fluid">
         <div className="row">
-          {/*<AppContainer
+          <AppContainer
             room={this.state.roomId}
             messages={this.state.messages}
             sendMessage={this.sendMessage}
             subscribeToRoom={this.subscribeToRoom}
             rooms={this.state.joinedRooms}
+            roomName={this.state.activeRoom}
             activeComponent={this.state.activeComponent}
             activeUser={this.state.activeUser}
             activeUsername={this.state.activeUsername}
             logout={this.signOut}
-          />*/}
-          <Conversations
-            subscribeToRoom={this.subscribeToRoom}
-            rooms={this.state.joinedRooms}
+            createRoom={this.createRoom}
+            signOut={this.signOut}
           />
-          <Conversation
-            messages={this.state.messages}
-            sendMessage={this.sendMessage}
-            room={this.state.roomId}
-            roomName={this.state.activeRoom}
-            activeUser={this.state.activeUser}
-          />
-          {/*<Account
-            activeUser={this.state.activeUser}
-            activeUsername={this.state.activeUsername}
-            logout={this.logout}
-          />*/}
           <Menu menuChange={this.menuChange} links={this.state.menuLinks} />
         </div>
       </div>
