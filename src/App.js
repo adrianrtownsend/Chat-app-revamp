@@ -7,8 +7,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: "red",
-      isLoggedIn: "true",
+      user: "",
+      isLoggedIn: "false",
       errorMessage: ""
     };
     this.checkLogin = this.checkLogin.bind(this);
