@@ -1,5 +1,9 @@
 import React from "react";
 
+function upperCaseConversation(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 function Account(props) {
   return (
     <div className="Account col-12 pt-5">
@@ -9,19 +13,19 @@ function Account(props) {
       <div className="row my-3">
         <div className="AccountIcon col-2">
           <div className=" d-flex flex-wrap justify-content-center align-items-center">
-            <span>{props.activeUser.charAt(0)}</span>
+            <span>{props.activeUser.charAt(0).toUpperCase()}</span>
           </div>
         </div>
         <div className="col-10">
           <h3>
-            <b>{props.activeUser}</b>
+            <b>{upperCaseConversation(props.activeUser)}</b>
           </h3>
           <h5>{props.activeUsername}</h5>
         </div>
       </div>
       <div className="col-12 SignOut d-flex flex-wrap justify-content-center">
         <div>
-          <button onClick={()=> props.signOut()}>Sign Out</button>
+          <button onClick={() => props.signOut()}>Sign Out</button>
         </div>
       </div>
       <hr />

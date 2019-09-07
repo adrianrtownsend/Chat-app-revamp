@@ -22,6 +22,12 @@ body {
   height: 100%;
 }
 
+.LoginBlock h1,
+.LoginBlock h3,
+.LoginBlock p {
+  text-align: center;
+}
+
 .disabled {
   display: none;
 }
@@ -48,8 +54,52 @@ body {
   width: 45px;
 }
 
+.menuActive {
+  border-bottom: solid white 3px;
+}
+
 .ConversationScroll {
   /*overflow: scroll;*/
+}
+
+.ConversationDeleteButton button {
+  border: none;
+  background: none;
+}
+
+.ConversationDeleteButton button:focus {
+  outline: 0;
+}
+
+.ConversationDeleteImg {
+  width: 25px !important;
+  margin: auto;
+  padding: 0px 5px !important;
+}
+
+.ConversationDeleteImgRotate {
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.ConversationConfirmDelete {
+  background-color: var(--main-color);
+  border-radius: 30px;
+  padding: 5px 20px;
+  color: var(--secondary-color);
+  font-weight: bold;
+  border: none;
+}
+
+.ConversationConfirmDelete:focus {
+  outline: 0;
+}
+
+a.ConversationListLink:link,
+a.ConversationListLink:hover {
+  text-decoration: none;
 }
 
 .ConversationList h1 {
@@ -84,6 +134,54 @@ body {
   font-size: 25px;
   font-weight: bold;
   color: var(--secondary-color);
+}
+
+.ConversationEdit button {
+  background: transparent;
+  border: none;
+}
+
+.ConversationEdit button:focus {
+  outline: 0;
+}
+
+.ConversationEdit button img {
+  width: 30px;
+}
+
+.ConversationNotification {
+  background-color: var(--send-message-form);
+  color: var(--secondary-color);
+  width: 20px;
+  font-size: 10px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.ConversationBack {
+  float: left;
+  border: 0;
+  background: none;
+  color: var(--main-color);
+}
+
+.ConversationInfoIcon button {
+  background: transparent;
+  border: none;
+}
+
+.ConversationInfoIcon button:focus {
+  outline: 0;
+}
+
+.ConversationInfoIcon button img {
+  width: 20px;
+}
+
+.ConversationAddMembers button {
+  border: none;
+  background: transparent;
+  color: var(--main-color);
 }
 
 .NewConversationForm {

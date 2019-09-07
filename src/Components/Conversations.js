@@ -7,12 +7,21 @@ function Conversations(props) {
       <div className="d-flex justify-content-between" />
       <ConversationList
         subscribeToRoom={props.subscribeToRoom}
+        deleteRoom={props.deleteRoom}
         rooms={props.rooms}
         messages={props.messages}
         sendMessage={props.sendMessage}
         room={props.room}
         roomName={props.roomName}
         activeUser={props.activeUser}
+        members={props.members}
+        toggleMembers={props.toggleMembers}
+        showMembers={props.showMembers}
+        addMember={props.addMember}
+        removeMember={props.removeMember}
+        addMemberBox={props.addMemberBox}
+        isConversationList={props.isConversationList}
+        openConversation={props.openConversation}
       />
     </div>
   );
