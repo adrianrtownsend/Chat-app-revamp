@@ -74,8 +74,6 @@ class ConversationList extends React.Component {
       thisDelete: !this.state.thisDelete,
       activeKey: e
     });
-    console.log(this.state.showDeletes);
-    console.log(this.state.activeKey);
   }
 
   deleteThis(value) {

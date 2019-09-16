@@ -58,7 +58,7 @@ class MainApp extends React.Component {
     this.menuChange = this.menuChange.bind(this);
     this.setActiveUser = this.setActiveUser.bind(this);
     this.createRoom = this.createRoom.bind(this);
-    //this.deleteRoom = this.deleteRoom.bind(this);
+    this.deleteRoom = this.deleteRoom.bind(this);
     this.openConversation = this.openConversation.bind(this);
     this.resetConversation = this.resetConversation.bind(this);
     this.toggleMembers = this.toggleMembers.bind(this);
@@ -168,7 +168,7 @@ class MainApp extends React.Component {
       });
   }
 
-  /*deleteRoom(value) {
+  deleteRoom(value) {
     this.currentUser
       .deleteRoom({
         roomId: value
@@ -179,7 +179,7 @@ class MainApp extends React.Component {
       .catch(err => {
         console.log("Error deleting room", value, " ", err);
       });
-  }*/
+  }
 
   menuChange(value) {
     this.setState({
