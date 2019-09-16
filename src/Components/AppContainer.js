@@ -23,13 +23,14 @@ class AppContainer extends React.Component {
             rooms={this.props.rooms}
             messages={this.props.messages}
             sendMessage={this.props.sendMessage}
-            room={this.props.roomId}
+            roomId={this.props.roomId}
             roomName={this.props.roomName}
             activeUser={this.props.activeUser}
             members={this.props.members}
             toggleMembers={this.props.toggleMembers}
             showMembers={this.props.showMembers}
-            addMemberBox={this.props.addMemberBox}
+            addMember={this.props.addMember}
+            removeMember={this.props.removeMember}
             isConversationList={this.props.isConversationList}
             openConversation={this.props.openConversation}
           />
@@ -51,7 +52,7 @@ class AppContainer extends React.Component {
             rooms={this.props.rooms}
             messages={this.props.messages}
             sendMessage={this.props.sendMessage}
-            room={this.props.roomId}
+            roomId={this.props.roomId}
             roomName={this.props.roomName}
             activeUser={this.props.activeUser}
             members={this.props.members}
@@ -59,7 +60,6 @@ class AppContainer extends React.Component {
             showMembers={this.props.showMembers}
             addMember={this.props.addMember}
             removeMember={this.props.removeMember}
-            addMemberBox={this.props.addMemberBox}
             isConversationList={this.props.isConversationList}
             openConversation={this.props.openConversation}
           />

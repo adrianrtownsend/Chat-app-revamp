@@ -195,12 +195,11 @@ class ConversationList extends React.Component {
             toggleMembers={this.props.toggleMembers}
             showMembers={this.props.showMembers}
             members={this.props.members}
-            addMemberBox={this.props.addMemberBox}
             addMember={this.props.addMember}
             removeMember={this.props.removeMember}
             messages={this.props.messages}
             sendMessage={this.props.sendMessage}
-            room={this.props.room}
+            roomId={this.props.roomId}
             roomName={this.props.roomName}
             activeUser={this.props.activeUser}
             getLastMessage={this.getLastMessage}

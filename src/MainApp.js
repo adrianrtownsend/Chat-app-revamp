@@ -58,7 +58,7 @@ class MainApp extends React.Component {
     this.menuChange = this.menuChange.bind(this);
     this.setActiveUser = this.setActiveUser.bind(this);
     this.createRoom = this.createRoom.bind(this);
-    this.deleteRoom = this.deleteRoom.bind(this);
+    //this.deleteRoom = this.deleteRoom.bind(this);
     this.openConversation = this.openConversation.bind(this);
     this.resetConversation = this.resetConversation.bind(this);
     this.toggleMembers = this.toggleMembers.bind(this);
@@ -75,7 +75,28 @@ class MainApp extends React.Component {
       })
     });
     chatManager
-      .connect()
+      .connect({
+        onAddedToRoom: room => {
+          this.setState({ joinedRooms: [...this.state.joinedRooms, room] });
+        },
+        onRoomDeleted: room => {
+          if (room.id === this.state.roomId) {
+            this.resetConversation();
+          }
+          this.getJoinableRooms();
+        },
+        onRemovedFromRoom: room => {
+          if (room.id === this.state.roomId) {
+            this.resetConversation();
+          }
+          this.getJoinableRooms();
+        },
+        onUserJoinedRoom: (room, user) => {
+          this.setState({
+            members: [...this.state.members, user]
+          });
+        }
+      })
       .then(currentUser => {
         this.setState({ loginSuccess: "true" });
         this.currentUser = currentUser;
@@ -137,14 +158,17 @@ class MainApp extends React.Component {
         addUserIds: [this.state.activeUser]
       })
       .then(room => {
-        console.log("Created room called", room.name);
+        this.subscribeToRoom(room.id, room.name);
+        this.menuChange("Conversations");
+        this.resetConversation();
+        this.openConversation();
       })
       .catch(err => {
-        console.log("Error creating room", err);
+        console.log("Error creating room!", err);
       });
   }
 
-  deleteRoom(value) {
+  /*deleteRoom(value) {
     this.currentUser
       .deleteRoom({
         roomId: value
@@ -155,7 +179,7 @@ class MainApp extends React.Component {
       .catch(err => {
         console.log("Error deleting room", value, " ", err);
       });
-  }
+  }*/
 
   menuChange(value) {
     this.setState({
@@ -187,40 +211,47 @@ class MainApp extends React.Component {
     }
   }
 
-  addMember(/*user, room*/) {
-    return console.log("I can see the value!! --> ");
-    /*this.currentUser
+  addMember(user) {
+    this.currentUser
       .addUserToRoom({
         userId: user,
-        roomId: room
+        roomId: this.state.roomId
       })
-      // Need a return that switches back to UPDATED LIST
       .then(() => {
-        console.log("Added " + user + " to room " + room);
+        console.log("Added: ", user);
       })
-      // Error needs to return "please try entering user again"
       .catch(err => {
-        console.log("Error adding user to room " + room + ": " + err);
-      });*/
-  }
-
-  removeMember(user, room) {
-    this.currentUser
-      .removeUserFromRoom({
-        userId: user,
-        roomId: room
-      })
-      //Need to show confirmation or updated list minus deleted user
-      .then(() => {
-        console.log("Removed " + user + " from room " + room);
-      })
-      //Show "sorry there was an issue deleting user"
-      .catch(err => {
-        console.log("Error removing user from room " + room + ": " + err);
+        console.log(
+          "Error adding" + user + "to room" + this.state.roomId + " " + err
+        );
       });
   }
 
-  sendMessage(text, roomId) {
+  removeMember(user, roomId) {
+    this.currentUser
+      .removeUserFromRoom({
+        userId: user,
+        roomId: roomId
+      })
+      //Need to show confirmation or updated list minus deleted user
+      .then(() => {
+        console.log("Removed " + user + " from room " + roomId);
+      })
+      //Show "sorry there was an issue deleting user"
+      .catch(err => {
+        console.log("Error removing user from room " + roomId + ": " + err);
+      });
+    let membersArray = this.state.members;
+    let membersArrayNew = [];
+    for (let i = 0; i < membersArray.length; i++) {
+      if (user !== membersArray[i].name) {
+        membersArrayNew.push(membersArray[i]);
+      }
+    }
+    this.setState({ members: membersArrayNew });
+  }
+
+  sendMessage(text) {
     this.currentUser.sendSimpleMessage({
       text,
       roomId: this.state.roomId
@@ -232,7 +263,7 @@ class MainApp extends React.Component {
       <div className="App container-fluid">
         <div className="row">
           <AppContainer
-            room={this.state.roomId}
+            roomId={this.state.roomId}
             messages={this.state.messages}
             sendMessage={this.sendMessage}
             subscribeToRoom={this.subscribeToRoom}
@@ -246,7 +277,6 @@ class MainApp extends React.Component {
             showMembers={this.state.showMembers}
             addMember={this.addMember}
             removeMember={this.removeMember}
-            addMemberBox={this.state.addMemberBox}
             logout={this.signOut}
             createRoom={this.createRoom}
             deleteRoom={this.deleteRoom}

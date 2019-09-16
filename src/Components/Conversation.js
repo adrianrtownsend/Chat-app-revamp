@@ -18,6 +18,10 @@ function Conversation(props) {
           members={props.members}
           toggleMembers={props.toggleMembers}
           roomName={props.roomName}
+          activeUser={props.activeUser}
+          addMember={props.addMember}
+          removeMember={props.removeMember}
+          roomId={props.roomId}
         />
       </div>
     );
@@ -41,7 +45,7 @@ function Conversation(props) {
           </div>
         </div>
         <div className="MessageRow row px-1 pt-2 pb-5">
-          {props.messages.map((message, index) => {
+          {props.messages.map(message => {
             const activeUserClass =
               props.activeUser === message.senderId ? "flex-row-reverse" : " ";
             return (

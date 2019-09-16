@@ -11,7 +11,7 @@ function Conversations(props) {
         rooms={props.rooms}
         messages={props.messages}
         sendMessage={props.sendMessage}
-        room={props.room}
+        roomId={props.roomId}
         roomName={props.roomName}
         activeUser={props.activeUser}
         members={props.members}
@@ -19,7 +19,6 @@ function Conversations(props) {
         showMembers={props.showMembers}
         addMember={props.addMember}
         removeMember={props.removeMember}
-        addMemberBox={props.addMemberBox}
         isConversationList={props.isConversationList}
         openConversation={props.openConversation}
       />

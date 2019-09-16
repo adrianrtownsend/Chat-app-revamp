@@ -62,6 +62,12 @@ body {
   /*overflow: scroll;*/
 }
 
+.ConversationDeleteMember button {
+  border: 0;
+  background: 0;
+  padding: 0 10px;
+}
+
 .ConversationDeleteButton button {
   border: none;
   background: none;
@@ -106,7 +112,11 @@ a.ConversationListLink:hover {
   font-weight: 600;
 }
 
-.conversationlistitem a:link {
+.ConversationListItem {
+  padding-bottom: 70px;
+}
+
+.Conversationlistitem a:link {
   text-decoration: none;
 }
 
