@@ -10,7 +10,10 @@ function Conversations(props) {
         deleteRoom={props.deleteRoom}
         rooms={props.rooms}
         messages={props.messages}
+        readMessages={props.readMessages}
         sendMessage={props.sendMessage}
+        userTyping={props.userTyping}
+        whoIsTyping={props.whoIsTyping}
         roomId={props.roomId}
         roomName={props.roomName}
         activeUser={props.activeUser}

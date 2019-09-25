@@ -28,16 +28,19 @@ body {
   text-align: center;
 }
 
+.LoginInformationIcon {
+  width: 25px;
+}
+
 .disabled {
   display: none;
 }
 
 .Menu {
   border-radius: 10px 10px 0 0;
-  box-shadow: var(--secondary-color) -5px -5px 5px;
   width: 100%;
   bottom: 0;
-  height: 75px;
+  height: 80px;
   position: fixed;
   background-color: var(--main-color);
   font-weight: 600;
@@ -56,10 +59,6 @@ body {
 
 .menuActive {
   border-bottom: solid white 3px;
-}
-
-.ConversationScroll {
-  /*overflow: scroll;*/
 }
 
 .ConversationDeleteMember button {
@@ -168,6 +167,10 @@ a.ConversationListLink:hover {
   border-radius: 50%;
 }
 
+.ConversationName {
+  background-color: white;
+}
+
 .ConversationBack {
   float: left;
   border: 0;
@@ -236,6 +239,15 @@ a.ConversationListLink:hover {
 li {
   list-style-type: none;
 }
+
+.InformationList li {
+  list-style-type: circle;
+}
+
+.SendMessageForm {
+  margin-left: -20px;
+}
+
 .message .message-username {
   font-size: 11px;
   color: var(--main-text-color);

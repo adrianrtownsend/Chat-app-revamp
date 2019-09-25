@@ -47,6 +47,19 @@ function Menu(props) {
           />
         </button>
       </div>
+      <div key={props.links[3].id}>
+        <button onClick={() => props.menuChange("Information")}>
+          <img
+            src={
+              props.activeComponent === "Information"
+                ? props.links[3].iconActive
+                : props.links[3].icon
+            }
+            alt={props.links[3].name}
+            className="MenuIcon"
+          />
+        </button>
+      </div>
     </div>
   );
 }

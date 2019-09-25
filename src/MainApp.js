@@ -9,6 +9,8 @@ import NewBlack from "./Assets/new-message-black.png";
 import NewWhite from "./Assets/new-message-white.png";
 import SettingsBlack from "./Assets/settings-black.png";
 import SettingsWhite from "./Assets/settings-white.png";
+import InformationBlack from "./Assets/information-black.png";
+import InformationWhite from "./Assets/information-white.png";
 
 import { tokenUrl, instanceLocator } from "./config";
 
@@ -25,6 +27,8 @@ class MainApp extends React.Component {
       rooms: [],
       showMembers: false,
       members: [],
+      isTyping: false,
+      whoIsTyping: "",
       messages: [],
       joinableRooms: [],
       joinedRooms: [],
@@ -49,11 +53,19 @@ class MainApp extends React.Component {
           icon: SettingsBlack,
           iconActive: SettingsWhite,
           disabled: true
+        },
+        {
+          id: 4,
+          name: "Information",
+          icon: InformationBlack,
+          iconActive: InformationWhite,
+          disabled: true
         }
       ]
     };
     this.sendMessage = this.sendMessage.bind(this);
     this.subscribeToRoom = this.subscribeToRoom.bind(this);
+    this.readMessages = this.readMessages.bind(this);
     this.getJoinableRooms = this.getJoinableRooms.bind(this);
     this.menuChange = this.menuChange.bind(this);
     this.setActiveUser = this.setActiveUser.bind(this);
@@ -64,6 +76,7 @@ class MainApp extends React.Component {
     this.toggleMembers = this.toggleMembers.bind(this);
     this.addMember = this.addMember.bind(this);
     this.removeMember = this.removeMember.bind(this);
+    this.userTyping = this.userTyping.bind(this);
   }
 
   componentDidMount() {
@@ -136,6 +149,16 @@ class MainApp extends React.Component {
         hooks: {
           onMessage: message => {
             this.setState({ messages: [...this.state.messages, message] });
+          },
+          onUserStartedTyping: user => {
+            this.setState({
+              whoIsTyping: user.name + " is typing..."
+            });
+          },
+          onUserStoppedTyping: user => {
+            this.setState({
+              whoIsTyping: ""
+            });
           }
         }
       })
@@ -145,6 +168,7 @@ class MainApp extends React.Component {
           activeRoom: roomName,
           members: room.users
         });
+        //this.readMessages(roomId, this.state.messages);
         this.getJoinableRooms();
       });
   }
@@ -184,6 +208,27 @@ class MainApp extends React.Component {
   menuChange(value) {
     this.setState({
       activeComponent: value
+    });
+  }
+
+  readMessages(thisRoomId, messages) {
+    //Need to get [roomId]
+    //Get array of mesages in room. Get last message of room
+    //position: [lastMessageofRoom.id]
+
+    let lastMessage = null;
+
+    if (messages.length - 1 > 0) {
+      lastMessage = messages.length - 1;
+    } else {
+      lastMessage = 0;
+    }
+
+    console.log(thisRoomId, messages[lastMessage].id);
+
+    this.currentUser.setReadCursor({
+      roomId: thisRoomId, //need to pass in room.id
+      position: messages[lastMessage].id //
     });
   }
 
@@ -251,6 +296,18 @@ class MainApp extends React.Component {
     this.setState({ members: membersArrayNew });
   }
 
+  userTyping() {
+    let timeout = null;
+
+    clearTimeout(timeout);
+
+    timeout = setTimeout(() => {
+      this.currentUser.isTypingIn({
+        roomId: this.state.roomId
+      });
+    }, 200);
+  }
+
   sendMessage(text) {
     this.currentUser.sendSimpleMessage({
       text,
@@ -265,7 +322,10 @@ class MainApp extends React.Component {
           <AppContainer
             roomId={this.state.roomId}
             messages={this.state.messages}
+            readMessages={this.readMessages}
             sendMessage={this.sendMessage}
+            userTyping={this.userTyping}
+            whoIsTyping={this.state.whoIsTyping}
             subscribeToRoom={this.subscribeToRoom}
             rooms={this.state.joinedRooms}
             roomName={this.state.activeRoom}

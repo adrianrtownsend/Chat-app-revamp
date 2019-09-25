@@ -15,7 +15,6 @@ class ConversationList extends React.Component {
       activeKey: ""
     };
     this.upperCaseConversation = this.upperCaseConversation.bind(this);
-    this.converTimeStamp = this.converTimeStamp.bind(this);
     this.openDeletes = this.openDeletes.bind(this);
     this.deleteThis = this.deleteThis.bind(this);
     this.showThisDeletes = this.showThisDeletes.bind(this);
@@ -32,31 +31,6 @@ class ConversationList extends React.Component {
 
   upperCaseConversation(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
-  }
-
-  converTimeStamp(string) {
-    // get today's date
-    var todaysDate = new Date();
-    if (string) {
-      const messageFullDate = string.split("T");
-      const messageDate = messageFullDate[0].split("-");
-      const messageDateConv =
-        messageDate[1] + "/" + messageDate[2] + "/" + messageDate[0];
-      const messageTime = messageFullDate[1].split(":");
-      console.log(messageDateConv, messageTime);
-    }
-    const todaysMonthDayYear =
-      todaysDate.getMonth() +
-      "/" +
-      todaysDate.getDate() +
-      "/" +
-      todaysDate.getFullYear();
-    console.log("today:", todaysMonthDayYear);
-    // get last message timestamp
-    // convert to date only
-    // if date == today show only time
-    // else show date only
-    const time = new Date();
   }
 
   openDeletes() {
@@ -82,10 +56,6 @@ class ConversationList extends React.Component {
 
   render() {
     if (this.props.isConversationList) {
-      //Sort rooms by last Message at?
-      const timeSortRooms = [this.props.rooms].sort(
-        (a, b) => b.lastMessageAt - a.lastMessageAt
-      );
       const rooms = this.props.rooms.map(room => (
         <div key={room.id}>
           <div className="row">
@@ -197,6 +167,8 @@ class ConversationList extends React.Component {
             removeMember={this.props.removeMember}
             messages={this.props.messages}
             sendMessage={this.props.sendMessage}
+            userTyping={this.props.userTyping}
+            whoIsTyping={this.props.whoIsTyping}
             roomId={this.props.roomId}
             roomName={this.props.roomName}
             activeUser={this.props.activeUser}

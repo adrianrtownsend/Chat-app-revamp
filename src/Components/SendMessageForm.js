@@ -18,7 +18,6 @@ class SendMessageForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(this.state.message);
     this.props.sendMessage(this.state.message);
     this.setState({
       message: ""
@@ -27,17 +26,20 @@ class SendMessageForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input
-          type="text"
-          className="form-control"
-          size="100"
-          id="message"
-          placeholder="Type Message and press ENTER"
-          value={this.state.message}
-          onChange={this.handleChange}
-        />
-      </form>
+      <div className="SendMessageForm col-12">
+        <form onSubmit={this.handleSubmit}>
+          <input
+            type="text"
+            className="form-control"
+            size="100"
+            id="message"
+            placeholder="Type Message and press ENTER"
+            value={this.state.message}
+            onChange={this.handleChange}
+            onKeyUp={() => this.props.userTyping()}
+          />
+        </form>
+      </div>
     );
   }
 }

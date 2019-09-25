@@ -26,7 +26,6 @@ class ConversationMembers extends React.Component {
     this.setState({
       newMember: e.target.value
     });
-    console.log("New Member Name: ", this.state.newMember);
   }
 
   handleSubmit(e) {

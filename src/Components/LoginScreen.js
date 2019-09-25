@@ -1,4 +1,5 @@
 import React from "react";
+import InformationBlack from "../Assets/information-black.png";
 
 class LoginScreen extends React.Component {
   constructor(props) {
@@ -52,12 +53,14 @@ class LoginScreen extends React.Component {
 
   render() {
     return (
-      <div className="col-12 p-5 LoginBlock">
-        <div className="border pt-4 pb-5">
-          <div className="mx-auto w-50">
-            <h1>
-              <b>Welcome!</b>
-            </h1>
+      <div className="col-12 LoginBlock h-100 d-flex justify content center">
+        <div className="border p-5 mx-auto my-auto">
+          <div className="mx-auto w-100">
+            <div className="mx-auto">
+              <h1>
+                <b>Welcome!</b>
+              </h1>
+            </div>
             <p>Login as user [red], [blue], or [green]</p>
             <h3>Enter Username</h3>
             <p>{this.props.errorMessage}</p>
@@ -67,15 +70,28 @@ class LoginScreen extends React.Component {
             id="loginForm"
             onSubmit={this.handleSubmit}
           >
-            <div className="form-group mx-auto">
-              <input
-                placeholder="User ID (Case Sensitive)"
-                onChange={this.handleChange}
-                className="form-control mr-3"
-              />
-              {this.disabledToggle()}
+            <div className="form-group d-flex flex-column mx-auto">
+              <div className="mx-auto">
+                <input
+                  placeholder="User ID (Case Sensitive)"
+                  onChange={this.handleChange}
+                  className="form-control mb-3"
+                />
+              </div>
+              <div className="mx-auto">{this.disabledToggle()}</div>
             </div>
           </form>
+          <div className="mt-2">
+            <p>
+              Once Logged In, press the{" "}
+              <img
+                src={InformationBlack}
+                className="LoginInformationIcon"
+                alt="information"
+              />{" "}
+              icon for information on the app.
+            </p>
+          </div>
         </div>
       </div>
     );

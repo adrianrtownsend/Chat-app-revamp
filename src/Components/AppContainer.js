@@ -2,6 +2,7 @@ import React from "react";
 import Conversations from "./Conversations";
 import New from "./New";
 import Account from "./Account";
+import Information from "./Information";
 
 class AppContainer extends React.Component {
   constructor(props) {
@@ -22,7 +23,10 @@ class AppContainer extends React.Component {
             deleteRoom={this.props.deleteRoom}
             rooms={this.props.rooms}
             messages={this.props.messages}
+            readMessages={this.props.readMessages}
             sendMessage={this.props.sendMessage}
+            userTyping={this.props.userTyping}
+            whoIsTyping={this.props.whoIsTyping}
             roomId={this.props.roomId}
             roomName={this.props.roomName}
             activeUser={this.props.activeUser}
@@ -45,13 +49,18 @@ class AppContainer extends React.Component {
             signOut={this.props.signOut}
           />
         );
+      case "Information":
+        return <Information />;
       default:
         return (
           <Conversations
             subscribeToRoom={this.props.subscribeToRoom}
             rooms={this.props.rooms}
             messages={this.props.messages}
+            readMessages={this.props.readMessages}
             sendMessage={this.props.sendMessage}
+            userTyping={this.props.userTyping}
+            whoIsTyping={this.props.whoIsTyping}
             roomId={this.props.roomId}
             roomName={this.props.roomName}
             activeUser={this.props.activeUser}
