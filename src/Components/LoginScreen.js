@@ -53,7 +53,7 @@ class LoginScreen extends React.Component {
 
   render() {
     return (
-      <div className="col-12 LoginBlock h-100 d-flex justify content center">
+      <div className="col-12 LoginBlock h-100 d-flex">
         <div className="border p-5 mx-auto my-auto">
           <div className="mx-auto w-100">
             <div className="mx-auto">
